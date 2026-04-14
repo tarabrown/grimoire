@@ -83,7 +83,8 @@ def load_config() -> dict:
     cfg = dict(DEFAULT_CONFIG)
     try:
         loaded = _load_grimoire_config()
-    except (OSError, json.JSONDecodeError):
+    except (OSError, json.JSONDecodeError) as e:
+        print(f"warning: failed to load grimoire config: {e}; using defaults", file=sys.stderr)
         return cfg
     # Drop commentary keys (anything starting with "_") and unknown keys
     for k, v in loaded.items():
@@ -557,15 +558,15 @@ def generate_wiki_pages():
     from generate_wiki import generate_wiki
     pages = generate_wiki()
 
-    print(f"\nGenerated {len(pages)} wiki pages + index-sbl.md in wiki/\n")
+    print(f"\nGenerated {len(pages)} wiki pages + index.md in wiki/\n")
     for title, filename, content in sorted(pages, key=lambda x: x[0]):
         size = len(content)
         lines = content.count('\n')
         print(f"  {filename:55s} {size:>6d} bytes  ({lines} lines)")
 
     wiki_dir = REPO_ROOT / "wiki"
-    index_size = (wiki_dir / "index-sbl.md").stat().st_size
-    print(f"\n  {'index-sbl.md':55s} {index_size:>6d} bytes")
+    index_size = (wiki_dir / "index.md").stat().st_size
+    print(f"\n  {'index.md':55s} {index_size:>6d} bytes")
     return pages
 
 
