@@ -1,0 +1,19 @@
+{
+  "owner_name": "Your Name",
+  "collection_name": "Your Grimoire",
+  "intellectual_profile": "A short paragraph about the person whose knowledge system this is — interests, disciplines, perspective. The bind and divine operations use this to frame synthesis appropriately.",
+  "profile_closer": "A closing sentence capturing how they tend to think or work.",
+  "cross_cutting_threads": "The in_conversation_with field in the catalog maps thematic resonance (what thinks about X the way Y does), not citations or influence chains.",
+  "shelves": {
+    "cluster_min_size": 2,
+    "max_overview_clusters": 15
+  },
+  "scrolls": {
+    "bind_budget_pages": 8,
+    "synthesis_candidate_threshold": 3
+  },
+  "inscribe": {
+    "shelves_image_extensions": [".jpg", ".jpeg", ".heic", ".png"],
+    "shelves_text_patterns": ["title list", "book list", "reading list", "media list"]
+  }
+}

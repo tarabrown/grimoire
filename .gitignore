@@ -1,0 +1,56 @@
+# Personal config — user fills locally
+grimoire.json
+
+# Shelves (library) — personal data & generated artifacts
+shelves/catalog.json
+shelves/CONTEXT.md
+shelves/CONTEXT_COMPACT.md
+shelves/CONTEXT_OVERVIEW.md
+shelves/wiki/
+shelves/photos/processed/*.jpeg
+shelves/photos/processed/*.jpg
+shelves/photos/processed/*.heic
+shelves/photos/processed/*.png
+shelves/processing_log.json
+shelves/inbox_manifest.json
+shelves/enrichment_queue.json
+shelves/new_extractions.json
+shelves/extracted_titles.json
+shelves/unreadable.json
+
+# Scrolls (wiki) — personal content
+scrolls/log.md
+scrolls/concepts/*.md
+scrolls/entities/*.md
+scrolls/sources/*.md
+scrolls/reports/*.md
+scrolls/synthesis/*.md
+
+# Don't ignore the index stub
+!scrolls/index.md
+
+# Don't ignore .gitkeep sentinels
+!**/.gitkeep
+
+# Raw ingested material
+raw/processed/*
+raw/assets/*
+raw/archive/*
+!raw/**/.gitkeep
+
+# Desk (inbox) — never commit anything dropped here
+desk/*
+!desk/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Editor / OS
+.DS_Store
+.obsidian/
+.claude/settings.local.json
+
+# Node (if ever used)
+node_modules/
