@@ -17,7 +17,7 @@ Look at each file in `desk/` (excluding `.gitkeep`) and classify:
 
 1. **Shelves-image** — a photograph of a bookshelf spine, a record stack, a DVD case, or similar physical media. File extensions in `grimoire.json → inscribe.shelves_image_extensions` (default `.jpg`, `.jpeg`, `.heic`, `.png`) are candidates. Confirm by looking at the image: if it shows physical media with titles visible, it's shelves-image.
 2. **Shelves-list** — a plain text file or markdown document that is *primarily* a list of media titles (books, films, albums). Heuristics: each line looks like a title (possibly with author/year), density of known media names, or filename/content matching patterns in `grimoire.json → inscribe.shelves_text_patterns`.
-3. **Scroll-source** — everything else. Articles, clipped web pages, personal notes, essays, transcripts, research memos.
+3. **Scroll-source** — everything else. Articles, clipped web pages, personal notes, essays, transcripts, research memos. Non-image, non-list artifacts — PDFs, OPML exports, voice-memo transcripts, clipped articles, code snippets, anything text-bearing that isn't a title list — are all scroll-source.
 
 When uncertain between shelves-list and scroll-source, ask the user once, then remember the answer for similar-looking items in this run.
 
@@ -46,4 +46,10 @@ Inscribe does the Stage 1 light pass. It does NOT:
 
 ## After a run
 
-Write a one-line entry to `scrolls/log.md` under a dated `## YYYY-MM-DD inscribe` section summarizing: count of items processed, breakdown by classification, overlaps flagged.
+Append an entry to `scrolls/log.md` using the canonical header format:
+
+```
+## YYYY-MM-DD inscribe — <summary>
+```
+
+The summary should capture: count of items processed, breakdown by classification, overlaps flagged.

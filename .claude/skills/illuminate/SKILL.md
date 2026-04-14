@@ -15,10 +15,10 @@ This is a maintenance operation. It does **not** create new wiki pages. Its only
 2. **Download** each remote image to `raw/assets/`. Use a stable filename derived from the source page slug (e.g. `karpathy-method-img-01.jpg`). If the asset already exists at the target filename, skip the download.
 3. **Rewrite** the markdown reference to point at the local copy via a relative path from the file being edited.
 4. **Skip** YouTube thumbnails and other links that are not real images. **Skip** dead URLs (note them in the log so the user can decide what to do).
-5. **Append a brief log entry** to `scrolls/log.md`:
+5. **Append a brief log entry** to `scrolls/log.md` using the canonical header format:
 
 ```
-## [YYYY-MM-DD] illuminate | <N> localized, <M> failed
+## YYYY-MM-DD illuminate — <N> localized, <M> failed
 ```
 
 Body: which source files were touched, how many images per file, and the dead URLs (with their containing files) for the user to triage.

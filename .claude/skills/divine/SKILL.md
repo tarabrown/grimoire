@@ -40,9 +40,9 @@ title: <full title>
 created: YYYY-MM-DD
 kind: synthesis
 drawn_from:
-  - concepts/<name>
-  - entities/<name>
-  - sources/<name>
+  - "[[concepts/<name>]]"
+  - "[[entities/<name>]]"
+  - "[[sources/<name>]]"
 tags: []
 ---
 
@@ -62,7 +62,13 @@ tags: []
 
 ### 3. Log
 
-Append to `scrolls/log.md` under a dated `## YYYY-MM-DD divine` section: the title, the drawn-from list, a one-line summary.
+Append an entry to `scrolls/log.md` using the canonical header format:
+
+```
+## YYYY-MM-DD divine — <summary>
+```
+
+Include: the title, the drawn-from list, a one-line summary.
 
 ## Boundary
 

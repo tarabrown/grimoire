@@ -20,10 +20,10 @@ Audit is a *reporting* operation, not a writing operation. Its job is to surface
 
 ## Output
 
-Write the audit result as a structured report directly to the user in the conversation. If the report is substantive enough that the user will want to refer back to it, offer to save it to `scrolls/reports/`. Either way, append a short entry to `scrolls/log.md`:
+Write the audit result as a structured report directly to the user in the conversation. If the report is substantive enough that the user will want to refer back to it, offer to save it to `scrolls/reports/`. Either way, append a short entry to `scrolls/log.md` using the canonical header format:
 
 ```
-## [YYYY-MM-DD] audit | <one-line summary of what surfaced>
+## YYYY-MM-DD audit — <one-line summary of what surfaced>
 ```
 
 Body: how many issues in each category, plus any items that were unambiguous enough to fix in passing (broken links, obvious typos).

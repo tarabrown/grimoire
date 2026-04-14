@@ -15,4 +15,14 @@ description: Use when the user asks a substantive question the wiki should be th
 4. **Flag uncertainty** explicitly. If two sources conflict, say so. If the answer rests on a single source, say so. Don't fill gaps with plausible-sounding content that isn't in the wiki.
 5. **Offer to save reusable answers.** If the answer is substantive and the user is likely to want to refer back to it (or use it as future source material), offer to save it as a new page in `scrolls/reports/`. Reports are Q&A outputs — distinct from `scrolls/synthesis/`, which is reserved for cross-cutting essays drafted by `divine`.
 
-If you save a report, append a short `consult` entry to `scrolls/log.md` noting the question and the report filename.
+## Logging
+
+Consult logs only when it produces a report under `scrolls/reports/`. Plain Q&A answers in the conversation are not logged.
+
+When a report is saved, append an entry to `scrolls/log.md` using the canonical header format:
+
+```
+## YYYY-MM-DD consult — report <slug> created
+```
+
+Body: the question asked, and a one-line summary of the answer.

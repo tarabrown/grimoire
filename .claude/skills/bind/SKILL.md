@@ -7,7 +7,7 @@ description: Use when the user asks for a weekly review, reflection, or deep pas
 
 > This skill is written from the CLAUDE.md spec, not from a real run. After the first real bind, rewrite this skill from what actually happened (per Isenberg: agents write better skills from real history than from theory).
 
-Binding is where the heavy work happens. Inscribe only creates source pages and flags potential overlaps — it never touches concept or entity pages. Bind does ALL of that: reading concept pages, updating them with new source material, creating new hubs, promoting entities. This is where the wiki's graph actually deepens. Synthesis drafting is *not* part of bind — it lives in `divine`, invoked separately by the user.
+The bind operation is where the heavy work happens. Inscribe only creates source pages and flags potential overlaps — it never touches concept or entity pages. The bind pass does ALL of that: reading concept pages, updating them with new source material, creating new hubs, promoting entities. This is where the wiki's graph actually deepens. Synthesis drafting is *not* part of bind — it lives in `divine`, invoked separately by the user.
 
 ## First-run note
 
@@ -15,9 +15,23 @@ Early ingests may have been done before the inscribe/bind split was enforced. Th
 
 ## Scoping
 
-Bind processes material since the last `bind` entry in the log. If the log has grown large, scan only from that marker forward — older material was handled by a previous bind (or by pre-split ingests on the first run).
+The bind operation processes material since the last `bind` entry in the log. Scan `scrolls/log.md` from the last `## YYYY-MM-DD bind — ` heading forward — older material was handled by a previous bind (or by pre-split ingests on the first run).
 
 **Per-session budget:** Propose a scope to the user at the start — e.g., "5 new sources to process, 3 concept pages to update, 2 entity promotions to consider." Get alignment before doing the work. This prevents runaway sessions.
+
+## Side output — synthesis candidates
+
+During the pass, watch for material that deserves a synthesis essay — a cross-cutting pattern, a convergence across sources, a thematic through-line. Do NOT draft. Instead, emit the flag as part of the bind log entry written in step 7, using this shape:
+
+```markdown
+## YYYY-MM-DD bind — <summary>
+
+### Synthesis candidates
+
+- **<working title>** — <2-3 sentence rationale>. Related pages: [[concept-a]], [[entity-b]], [[source-c]].
+```
+
+The user invokes `divine` separately to pick up a candidate and write the essay.
 
 ## Steps
 
@@ -57,23 +71,13 @@ Walk the queued **Shelves neighborhood** flags from step 1 and any newly created
 Reflect any new pages and structural cleanup.
 
 ### 7. Append a bind entry to `scrolls/log.md`
-Header: `## [YYYY-MM-DD] bind | <brief description>`
+Use the canonical header format:
 
-Body: bulleted list — what was updated, promoted, restructured, which Shelves connections were added, and any candidates *rejected* (with one-line reason). **Keep the entry concise** — same spirit as inscribe's 20-line limit, though bind entries can be longer since they cover more work. Aim for under 40 lines.
-
-## Synthesis candidates (flag, don't write)
-
-During the pass, watch for material that deserves a synthesis essay — a cross-cutting pattern, a convergence across sources, a thematic through-line. Do NOT draft. Instead, append a flag to `scrolls/log.md`:
-
-```markdown
-## YYYY-MM-DD bind
-
-### Synthesis candidates
-
-- **<working title>** — <2-3 sentence rationale>. Related pages: [[concept-a]], [[entity-b]], [[source-c]].
+```
+## YYYY-MM-DD bind — <brief description>
 ```
 
-The user invokes `divine` separately to pick up a candidate and write the essay.
+Body: bulleted list — what was updated, promoted, restructured, which Shelves connections were added, and any candidates *rejected* (with one-line reason). Also record any synthesis candidates noticed during the pass (see _Side output — synthesis candidates_ above for the sub-section format). **Keep the entry concise** — same spirit as inscribe's 20-line limit, though bind entries can be longer since they cover more work. Aim for under 40 lines.
 
 ### 8. Archive old log entries
 If `scrolls/log.md` exceeds ~200 lines after appending the new entry, move everything older than this bind entry to `scrolls/log-archive.md` (create if needed, append at top). The working log should only contain the most recent bind and any inscribes since.
