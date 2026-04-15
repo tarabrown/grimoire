@@ -1,0 +1,11 @@
+{
+  "_comment": "Copy this file to tests/fixtures/audit_patterns.json (gitignored) and fill in your personal patterns. The depersonalization test will audit every file in SYSTEM_GLOBS for these strings and regex hits. Fresh forks can leave it as-is — the placeholder patterns won't match anything real.",
+  "substrings": [
+    "YOUR_FULL_NAME",
+    "your_handle",
+    "/Users/YOUR_USERNAME"
+  ],
+  "regexes": [
+    ["\\bYOUR_FIRST_NAME\\b", "bare first name — replace with your first name"]
+  ]
+}

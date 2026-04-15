@@ -41,6 +41,13 @@ python3 -m pytest tests/ -v
 
 The tests verify structural invariants: skill metadata, depersonalization, and that the Shelves scripts run clean on an empty catalog.
 
+The depersonalization audit scans system files for strings that shouldn't leak into a public repo. It reads its patterns from `tests/fixtures/audit_patterns.json` (gitignored) if present, otherwise from `tests/fixtures/audit_patterns.example.json` (whose placeholders don't match anything real). To make the audit catch _your_ personal data, copy the example to the gitignored file and fill in your name, handles, and system paths:
+
+```bash
+cp tests/fixtures/audit_patterns.example.json tests/fixtures/audit_patterns.json
+# edit tests/fixtures/audit_patterns.json
+```
+
 ## Directory shape
 
 ```

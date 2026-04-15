@@ -1,6 +1,9 @@
 # Personal config — user fills locally
 grimoire.json
 
+# Personal depersonalization audit patterns — fork-specific, gitignored
+tests/fixtures/audit_patterns.json
+
 # Shelves (library) — personal data & generated artifacts
 shelves/catalog.json
 shelves/CONTEXT.md
