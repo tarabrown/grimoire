@@ -75,7 +75,7 @@ Grimoire is primarily an LLM-driven system — most day-to-day interaction is as
 ## Running the tests
 
 ```bash
-pip install -r requirements-dev.txt
+pip install pytest
 python3 -m pytest tests/ -v
 ```
 

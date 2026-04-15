@@ -20,7 +20,6 @@ SYSTEM_GLOBS = [
     "CLAUDE.md",
     "AGENTS.md",
     "README.md",
-    "review.html",
     "grimoire.example.json",
     "schema.json",
     ".claude/skills/**/SKILL.md",
