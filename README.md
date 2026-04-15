@@ -33,6 +33,8 @@ A typical rhythm:
 
 Inscribe classifies each item and routes it: book/record/film photos to the Shelves import pipeline, clipped articles and other prose to a new Scrolls source page, anything else into the scroll-source bucket. Nothing sits stale.
 
+**Importing a whole shelf at once:** take a photo of your bookshelf, film shelf, or record stack and drop it in `desk/`. Inscribe moves it to the Shelves photo inbox; ask for the extraction pass and vision reads every visible spine, creating a catalog entry for each — title, author (or director, or artist), year, themes, a short synopsis. Hundreds of books in minutes, no typing.
+
 **Any time a question comes up:**
 
 > "Consult: what do I have about X?"
