@@ -19,6 +19,42 @@ The library tells you what you've read; the wiki tells you what you're working t
 | **audit** | "lint the wiki" | Surfaces contradictions, orphans, stale claims |
 | **illuminate** | "localize images" | Downloads remote images, rewrites refs |
 
+## How to use your Grimoire
+
+Grimoire is conversational — every operation is you asking an LLM to run it. A typical rhythm:
+
+**Daily-ish:** drop new material (articles, bookshelf photos, notes) into `desk/`. When it's time to process, ask your LLM:
+
+> "Inscribe the desk."
+
+Inscribe classifies each item and routes it: book/record/film photos to the Shelves import pipeline, clipped articles and other prose to a new Scrolls source page, anything else into the scroll-source bucket. Nothing sits stale.
+
+**Any time a question comes up:**
+
+> "Consult: what do I have about X?"
+
+You get an answer synthesized from your wiki, with links back to the source pages and any relevant entries in your library.
+
+**Weekly, or when a batch of sources has accumulated:**
+
+> "Let's do a bind pass."
+
+Bind updates concept and entity pages with recent material, creates topic hubs when warranted, and flags synthesis candidates for you to consider later.
+
+**When an essay wants writing:**
+
+> "Divine a synthesis on X."
+
+Divine proposes the shape first (title, pages to draw from, argument sketch), waits for your approval, then drafts the essay under `scrolls/synthesis/`.
+
+**Maintenance, roughly monthly:**
+
+> "Audit the wiki." / "Illuminate — pull remote images local."
+
+Audit surfaces contradictions, orphans, and stale claims. Illuminate downloads remote images into `raw/assets/` before the URLs rot, rewriting references to the local copies.
+
+Grimoire doesn't watch your files — nothing runs until you ask.
+
 ## Setup
 
 ```bash
