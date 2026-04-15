@@ -87,7 +87,7 @@ def cluster_link(label: str) -> str:
 # Unlike regenerate.py's derive_clusters (which assigns each entry to its
 # single most-specific theme), this script puts each entry on EVERY cluster
 # page whose theme it qualifies for. This is what produces the graph-view
-# web Sean wants in Obsidian.
+# web the user wants in Obsidian.
 # ---------------------------------------------------------------------------
 
 def derive_multi_clusters(

@@ -11,6 +11,8 @@ EXPECTED = {"inscribe", "bind", "consult", "divine", "audit", "illuminate"}
 
 
 def _parse_frontmatter(text: str) -> dict:
+    """Parses simple `key: value` frontmatter. Single-line values only;
+    multi-line YAML (folded, literal, lists) is not supported."""
     if not text.startswith("---\n"):
         return {}
     end = text.find("\n---\n", 4)

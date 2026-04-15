@@ -3,6 +3,7 @@ leak into system files. LICENSE is exempt (legal document names the
 original author). Content files (if any example content is added
 later) are excluded from this check."""
 
+import re
 import subprocess
 from pathlib import Path
 
@@ -20,10 +21,14 @@ SYSTEM_GLOBS = [
     "docs/**/*.md",
 ]
 
-FORBIDDEN = [
-    r"Sean Bonner",
-    r"seanbonner",
-    r"/Users/seanbonner",
+SUBSTRING_FORBIDDEN = [
+    "Sean Bonner",
+    "seanbonner",
+    "/Users/seanbonner",
+]
+
+REGEX_FORBIDDEN = [
+    (r"\bSean\b", "bare first-name 'Sean'"),
 ]
 
 
@@ -40,9 +45,12 @@ def test_no_personal_leaks():
     failures = []
     for f in files:
         text = f.read_text(errors="ignore")
-        for needle in FORBIDDEN:
+        for needle in SUBSTRING_FORBIDDEN:
             if needle.lower() in text.lower():
                 failures.append((str(f.relative_to(REPO)), needle))
+        for pattern, label in REGEX_FORBIDDEN:
+            if re.search(pattern, text):
+                failures.append((str(f.relative_to(REPO)), label))
     assert not failures, "personal data leaks:\n" + "\n".join(
         f"  {path}: {needle!r}" for path, needle in failures
     )
