@@ -28,12 +28,18 @@ cp grimoire.example.json grimoire.json
 # edit grimoire.json — fill in owner_name, intellectual_profile, etc.
 ```
 
-Install Python deps for Shelves scripts (Python 3.11+):
-```bash
-pip install -r shelves/requirements.txt
-```
+The Shelves scripts use only Python standard library — no `pip install` step. Requires Python 3.9 or later.
 
 Grimoire is primarily an LLM-driven system — most day-to-day interaction is asking an LLM to run an operation. Claude Code with the skills in `.claude/skills/` is the reference implementation.
+
+## Running the tests
+
+```bash
+pip install -r requirements-dev.txt
+python3 -m pytest tests/ -v
+```
+
+The tests verify structural invariants: skill metadata, depersonalization, and that the Shelves scripts run clean on an empty catalog.
 
 ## Directory shape
 

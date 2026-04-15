@@ -14,6 +14,7 @@ SYSTEM_GLOBS = [
     "CLAUDE.md",
     "AGENTS.md",
     "README.md",
+    "review.html",
     "grimoire.example.json",
     "schema.json",
     ".claude/skills/**/SKILL.md",
@@ -29,6 +30,8 @@ SUBSTRING_FORBIDDEN = [
 
 REGEX_FORBIDDEN = [
     (r"\bSean\b", "bare first-name 'Sean'"),
+    (r"\bSBL\b", "old project name 'SBL'"),
+    (r"\bSBW\b", "old project name 'SBW'"),
 ]
 
 

@@ -1,7 +1,7 @@
 """Smoke test: shelves scripts run end-to-end on an empty catalog.
 
 No behavior asserted beyond exit code 0. The goal is path-correctness
-after the port, not re-testing SBL's logic."""
+after the port, not re-testing the upstream scripts' logic."""
 
 import json
 import shutil
