@@ -1,3 +1,5 @@
+![Grimoire](grimoire.jpg)
+
 # Grimoire
 
 A personal knowledge system with two layers: a **library catalog** of things you've consumed (books, films, music) and a **research wiki** of things you're thinking about. Unified behind one inbox and six named operations.
@@ -21,7 +23,9 @@ The library tells you what you've read; the wiki tells you what you're working t
 
 ## How to use your Grimoire
 
-Grimoire is conversational — every operation is you asking an LLM to run it. A typical rhythm:
+Grimoire is conversational — every operation is you asking an LLM to run it. The files are plain markdown, so [Obsidian](https://obsidian.md) works well as the reading and editing layer — point a vault at your grimoire folder and you get scrolls and shelves with backlinks, graph view, and search. The [Obsidian Web Clipper](https://obsidian.md/clipper) browser extension sends articles straight into `desk/`, ready for the next inscribe pass.
+
+A typical rhythm:
 
 **Daily-ish:** drop new material (articles, bookshelf photos, notes) into `desk/`. When it's time to process, ask your LLM:
 
