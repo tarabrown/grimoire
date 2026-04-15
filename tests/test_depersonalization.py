@@ -22,6 +22,7 @@ SYSTEM_GLOBS = [
     "README.md",
     "grimoire.example.json",
     "schema.json",
+    "scrolls/index.example.md",
     ".claude/skills/**/SKILL.md",
     "shelves/scripts/**/*.py",
     "docs/**/*.md",

@@ -15,6 +15,10 @@ shelves/photos/processed/*.jpeg
 shelves/photos/processed/*.jpg
 shelves/photos/processed/*.heic
 shelves/photos/processed/*.png
+shelves/photos/inbox/*.jpeg
+shelves/photos/inbox/*.jpg
+shelves/photos/inbox/*.heic
+shelves/photos/inbox/*.png
 shelves/processing_log.json
 shelves/inbox_manifest.json
 shelves/enrichment_queue.json
@@ -24,14 +28,15 @@ shelves/unreadable.json
 
 # Scrolls (wiki) — personal content
 scrolls/log.md
+scrolls/index.md
 scrolls/concepts/*.md
 scrolls/entities/*.md
 scrolls/sources/*.md
 scrolls/reports/*.md
 scrolls/synthesis/*.md
 
-# Don't ignore the index stub
-!scrolls/index.md
+# Don't ignore the tracked template
+!scrolls/index.example.md
 
 # Don't ignore .gitkeep sentinels
 !**/.gitkeep
