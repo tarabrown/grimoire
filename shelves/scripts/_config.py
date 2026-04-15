@@ -2,12 +2,18 @@
 
 Resolves grimoire.json at the Grimoire root, which is one directory up
 from shelves/. Falls back to grimoire.example.json if grimoire.json is
-missing (useful for CI / smoke tests)."""
+missing (useful for CI / smoke tests).
+
+SHELVES_ROOT defaults to the directory containing this script's parent,
+but can be overridden via the GRIMOIRE_SHELVES_ROOT env var — used by
+smoke tests to redirect scripts at a tmp directory."""
 
 import json
+import os
 from pathlib import Path
 
-SHELVES_ROOT = Path(__file__).resolve().parent.parent  # shelves/
+_ENV_ROOT = os.environ.get("GRIMOIRE_SHELVES_ROOT")
+SHELVES_ROOT = Path(_ENV_ROOT).resolve() if _ENV_ROOT else Path(__file__).resolve().parent.parent
 GRIMOIRE_ROOT = SHELVES_ROOT.parent
 
 def load_config() -> dict:
