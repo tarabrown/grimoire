@@ -5,21 +5,44 @@ description: Use when the user asks a substantive question the wiki should be th
 
 # consult
 
-> This skill is written from the CLAUDE.md spec, not from a real run. After the first real query, rewrite this skill from what actually happened.
+> Rewritten from real run (2026-04-15): "what do I have about CryptoPunks?" — pulled entity + concept + verified cross-layer links.
 
 ## Steps
 
-1. **Read `scrolls/index.md`** to find the relevant pages. The index is the entry point — don't grep blind across the whole wiki when the index is the catalog.
-2. **Read those pages** in full. Follow the `## See also` links one hop if a page references something that looks load-bearing for the answer.
-3. **Synthesize an answer.** Use `[[wikilinks]]` to point the user back to the pages and sources you drew on. Cite source filenames where a specific claim depends on a specific source.
-4. **Flag uncertainty** explicitly. If two sources conflict, say so. If the answer rests on a single source, say so. Don't fill gaps with plausible-sounding content that isn't in the wiki.
-5. **Offer to save reusable answers.** If the answer is substantive and the user is likely to want to refer back to it (or use it as future source material), offer to save it as a new page in `scrolls/reports/`. Reports are Q&A outputs — distinct from `scrolls/synthesis/`, which is reserved for cross-cutting essays drafted by `divine`.
+### 1. Start from the index
+Read `scrolls/index.md`. Scan for pages relevant to the question — entity pages, concept pages, and source pages that match the topic. The index is organized by category (Art > Digital Art, Art > NFT Provenance, Entities, Concepts, Sources, Synthesis) — use the structure to narrow quickly.
+
+### 2. Read the hub page(s)
+Read the most relevant entity or concept page in full. These are the load-bearing pages — they aggregate multiple sources and carry cross-references to both Scrolls pages (via `[[wikilinks]]`) and Shelves catalog entries (via `../../shelves/wiki/books/<slug>.md` relative links).
+
+### 3. Follow one hop where load-bearing
+If the hub page's `## See also` or body links reference a concept or entity that looks essential to the answer, read that page too. In the real run, `[[cryptopunks]]` (entity) led to `[[nft-provenance-and-value]]` (concept) — the concept page carried additional framing the entity didn't duplicate.
+
+One hop is usually enough. Don't spider the whole wiki.
+
+### 4. Verify cross-layer links
+If the answer cites Shelves books via `../../shelves/wiki/books/` paths, spot-check that the targets exist (`ls shelves/wiki/books/ | grep <slug>`). Broken cross-layer links undermine the answer's credibility.
+
+### 5. Synthesize the answer
+Structure the answer around what the wiki actually contains:
+- **Hub summary** — what the entity/concept page says
+- **Source inventory** — list the source pages with dates and one-line descriptions, using `[[wikilinks]]`
+- **Shelves cross-layer** — any books in the library that connect, with resolution status
+- **Gaps** — what the wiki doesn't cover yet, if relevant to the question
+
+Use `[[wikilinks]]` throughout so the user can click through in Obsidian. Cite specific source filenames where a claim depends on a single source.
+
+### 6. Flag uncertainty
+If two sources conflict, say so. If the answer rests on a single source, say so. If a source page is metadata-only (clipper captured no body text), note that limitation. Don't fill gaps with plausible-sounding content.
+
+### 7. Offer to save (only if substantive)
+If the answer is genuinely reusable — not a one-off lookup — offer to save as `scrolls/reports/<slug>.md`. Reports are Q&A outputs, distinct from `scrolls/synthesis/` (cross-cutting essays drafted by `divine`). Most consult answers stay in the conversation and don't need saving.
 
 ## Logging
 
 Consult logs only when it produces a report under `scrolls/reports/`. Plain Q&A answers in the conversation are not logged.
 
-When a report is saved, append an entry to `scrolls/log.md` using the canonical header format:
+When a report is saved, append an entry to `scrolls/log.md`:
 
 ```
 ## YYYY-MM-DD consult — report <slug> created

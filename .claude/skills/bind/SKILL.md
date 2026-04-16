@@ -5,79 +5,79 @@ description: Use when the user asks for a weekly review, reflection, or deep pas
 
 # bind — Stage 2 deep pass
 
-> This skill is written from the CLAUDE.md spec, not from a real run. After the first real bind, rewrite this skill from what actually happened (per Isenberg: agents write better skills from real history than from theory).
+> Rewritten from real run (2026-04-15): reconciliation pass over 5 pre-split sources. Promoted Hertzmann entity, batched Shelves cross-check (no new hits), rejected 4 candidates with rationale, flagged 1 synthesis candidate, archived log.
 
-The bind operation is where the heavy work happens. Inscribe only creates source pages and flags potential overlaps — it never touches concept or entity pages. The bind pass does ALL of that: reading concept pages, updating them with new source material, creating new hubs, promoting entities. This is where the wiki's graph actually deepens. Synthesis drafting is *not* part of bind — it lives in `divine`, invoked separately by the user.
+Bind is where the wiki's graph deepens. Inscribe only creates source pages and flags overlaps — it never touches concept or entity pages. Bind does ALL of that: reading concept pages, updating them with new material, creating hubs, promoting entities. Synthesis drafting is NOT part of bind — it lives in `divine`.
 
-## First-run note
+## Reconciliation mode
 
-Early ingests may have been done before the inscribe/bind split was enforced. They could have created concept pages, built deep cross-references, added Shelves library sections, and written multi-paragraph concept updates. The first bind pass is therefore a **reconciliation**, not a fresh build. Scan what exists, identify gaps or stale connections left by the old process, and focus new work on sources inscribed after the lean inscribe process took effect. Don't redo work that's already done.
-
-## Scoping
-
-The bind operation processes material since the last `bind` entry in the log. Scan `scrolls/log.md` from the last `## YYYY-MM-DD bind — ` heading forward — older material was handled by a previous bind (or by pre-split ingests on the first run).
-
-**Per-session budget:** Propose a scope to the user at the start — e.g., "5 new sources to process, 3 concept pages to update, 2 entity promotions to consider." Get alignment before doing the work. This prevents runaway sessions.
-
-## Side output — synthesis candidates
-
-During the pass, watch for material that deserves a synthesis essay — a cross-cutting pattern, a convergence across sources, a thematic through-line. Do NOT draft. Instead, emit the flag as part of the bind log entry written in step 7, using this shape:
-
-```markdown
-## YYYY-MM-DD bind — <summary>
-
-### Synthesis candidates
-
-- **<working title>** — <2-3 sentence rationale>. Related pages: [[concept-a]], [[entity-b]], [[source-c]].
-```
-
-The user invokes `divine` separately to pick up a candidate and write the essay.
+If the last log entries are pre-split ingests (labeled "ingest" rather than "inscribe") that already updated concept pages, this bind is a **reconciliation**, not a fresh build. Focus on the "Candidates for Reflect" (or "Potential overlaps") list at the bottom of those entries rather than re-reading all sources and redoing concept work.
 
 ## Steps
 
 ### 1. Scan the log
 Read `scrolls/log.md` from the last `bind` entry forward. Identify:
-- Every source inscribed since then.
-- Every **Potential overlaps** list from those inscribe entries — these are the pointers inscribe left showing which sources connect to which existing pages. (Older entries may use **Candidates for Reflect** instead — same purpose, different label. Check for both.)
-- Any **Shelves: neighborhood** lines queued for the batched Shelves pass in step 5.
+- Every source inscribed since then (check for both "inscribe" and older "ingest" labels).
+- Every **Potential overlaps** / **Candidates for Reflect** list — these are the pointers inscribe left.
+- Any **Shelves: neighborhood** lines queued for the batched cross-check.
 
 ### 2. Read the new material
-Read every source page created since the last bind. Read the concept/entity pages flagged in the inscribe overlap lists. This is where you do the reading that inscribe deliberately skips.
+Read every source page created since the last bind. Read the concept/entity pages flagged in the overlap lists. This is where the reading happens that inscribe deliberately skips.
 
-### 3. Look for real overlaps
-Four categories of move, in roughly this order of weight:
+### 3. Propose scope to the user
+Before doing work, propose a budget: "N sources to process, N concept pages to update, N entity promotions to consider, N rejections." Get alignment. This prevents runaway sessions.
 
-- **Concept/entity page updates.** This is where ALL concept and entity page editing happens — adding sources to frontmatter, writing new body content, adding See Also links, restructuring sections. Inscribe does not touch these pages; bind does all of it.
-- **Concept hub candidates.** Multiple (4+) recent sources touching the same theme that isn't yet a concept page. Create the page.
-- **Entity promotions.** Stubs or inline mentions that have crossed the multi-source threshold and now deserve real entity pages.
-- **Orphans and non-obvious connections.** Pages linked from nothing; overlaps between older and recent material that inscribe missed.
+In the real run, the proposal was: "1 entity promotion (Hertzmann, 2 sources — threshold met), 1 batched Shelves cross-check, 4 rejections (Casey Reas, Art Blocks, two concept hubs — thresholds not met)." User said "sure, whatever is needed."
 
-### 4. Propose before doing (for substantial work)
-For new concept pages or large restructurings: **propose to the user first**. For smaller cleanups (orphan hookups, cross-reference fixes, stub promotions from clearly-earned material), just do them.
+### 4. Execute the work
+Four categories, roughly in order of weight:
+
+- **Concept/entity page updates.** Add sources to frontmatter, write new body sections, add See Also links. In the real run: added `[[aaron-hertzmann]]` to See Also on 3 concept pages (autonomous-ai-artists, technology-disruption-in-art, generative-art).
+- **Entity promotions.** Multi-source threshold (2+ substantive sources citing the same figure). In the real run: created `scrolls/entities/aaron-hertzmann.md` — two sources (Gotlieb Lecture + Le Random interview).
+- **Concept hub candidates.** 4+ recent sources touching the same theme without a concept page. Create the page. Propose first for substantial new pages.
+- **Orphans and non-obvious connections.** Pages linked from nothing; cross-refs that inscribe missed.
 
 ### 5. Batched Shelves cross-check
-Walk the queued **Shelves neighborhood** flags from step 1 and any newly created or substantially updated pages from this bind.
+Walk the queued Shelves neighborhood flags and any newly created/updated pages.
 
-**Tier choice — default to the smallest tier that answers the question:**
-- `shelves/CONTEXT_OVERVIEW.md` (smallest) — confirm or deny a neighborhood call.
-- `shelves/CONTEXT_COMPACT.md` (mid) — **workhorse tier for bind.**
-- `shelves/CONTEXT.md` (largest) — full synopses. Load once for the whole batch, not per page. Check file size first — grows as catalog grows.
+**Tier choice:** Check file sizes first, then pick the smallest tier that answers the question:
+- `shelves/CONTEXT_OVERVIEW.md` — confirm/deny a neighborhood call
+- `shelves/CONTEXT_COMPACT.md` — workhorse tier
+- `shelves/CONTEXT.md` — full synopses; grep once for the whole batch
 
-**For each hit:** grep for author names (fuzzy/last-name OK), check topic slugs in `../shelves/wiki/`, and add or update `## In the library` on the Scrolls page with relative-path links. Match depth to hit count — thin hits get a note, not a full section on every page.
+In the real run: checked COMPACT size (475 lines), then grepped full CONTEXT.md for a batch of 10 entity/author names. Result: no new biographical hits beyond the topical cluster already cited on relevant pages. Conclusion recorded in the log entry.
+
+**For each hit:** add or update `## In the library` on the Scrolls page with relative-path links (`../../shelves/wiki/books/<slug>.md`). Match depth to hit count.
 
 **Scope:** entity and concept pages by default. Skip source pages. **Direction:** Scrolls reads Shelves; never write to Shelves.
 
-### 6. Update `scrolls/index.md`
-Reflect any new pages and structural cleanup.
+### 6. Record rejections
+Explicitly log candidates considered and rejected, with one-line reasons. This prevents re-evaluating the same candidates next bind. In the real run: 4 rejections (Casey Reas — two thin mentions; Art Blocks — single source; two concept hubs — single source each).
 
-### 7. Append a bind entry to `scrolls/log.md`
-Use the canonical header format:
+### 7. Update `scrolls/index.md`
+Add any new pages. Update the `updated:` date in frontmatter.
+
+### 8. Append a bind entry to `scrolls/log.md`
+Canonical header format:
 
 ```
 ## YYYY-MM-DD bind — <brief description>
 ```
 
-Body: bulleted list — what was updated, promoted, restructured, which Shelves connections were added, and any candidates *rejected* (with one-line reason). Also record any synthesis candidates noticed during the pass (see _Side output — synthesis candidates_ above for the sub-section format). **Keep the entry concise** — same spirit as inscribe's 20-line limit, though bind entries can be longer since they cover more work. Aim for under 40 lines.
+Body sections:
+- **Promoted:** what was created/updated
+- **Shelves cross-check:** method, results, conclusion
+- **Rejected:** candidates not acted on, with reasons
+- **Still open:** items punted (e.g., re-clip needed)
+- **Synthesis candidates** (sub-section): cross-cutting patterns noticed during the pass. Format:
 
-### 8. Archive old log entries
-If `scrolls/log.md` exceeds ~200 lines after appending the new entry, move everything older than this bind entry to `scrolls/log-archive.md` (create if needed, append at top). The working log should only contain the most recent bind and any inscribes since.
+```markdown
+### Synthesis candidates
+
+- **<working title>** — <2-3 sentence rationale>. Related pages: [[concept-a]], [[entity-b]], [[source-c]].
+```
+
+Aim for under 40 lines total.
+
+### 9. Archive old log entries
+If `scrolls/log.md` exceeds ~200 lines after appending, move everything older than this bind entry to `scrolls/log-archive.md` (create if needed, append at top with frontmatter). The working log should only contain the most recent bind and any inscribes since.

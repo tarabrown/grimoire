@@ -564,7 +564,8 @@ def generate_wiki_pages():
         lines = content.count('\n')
         print(f"  {filename:55s} {size:>6d} bytes  ({lines} lines)")
 
-    wiki_dir = REPO_ROOT / "wiki"
+    from _config import SHELVES_ROOT as _sr
+    wiki_dir = _sr / "wiki"
     index_size = (wiki_dir / "index.md").stat().st_size
     print(f"\n  {'index.md':55s} {index_size:>6d} bytes")
     return pages

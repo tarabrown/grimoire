@@ -32,11 +32,10 @@ from pathlib import Path
 from collections import Counter
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from _config import catalog_path  # noqa: E402
+from _config import catalog_path, SHELVES_ROOT  # noqa: E402
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
 CATALOG_PATH = catalog_path()
-WIKI_DIR = REPO_ROOT / "wiki"
+WIKI_DIR = SHELVES_ROOT / "wiki"
 BOOKS_DIR = WIKI_DIR / "books"
 
 from regenerate import (  # noqa: E402
