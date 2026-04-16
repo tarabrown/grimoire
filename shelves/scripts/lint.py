@@ -19,10 +19,18 @@ Prints suggestions for improving the knowledge base.
 
 from __future__ import annotations
 import json
+import re
 import sys
 from pathlib import Path
 from collections import Counter, defaultdict
 from difflib import SequenceMatcher
+
+# Matches volume/number indicators in a title: "Vol 1", "Vol. 2", "No. 1",
+# "Part II", "Book 3", "Pt. 4" — used to distinguish series siblings from dupes.
+VOLUME_PATTERN = re.compile(
+    r"\b(?:vol(?:ume)?|no|number|part|book|pt)\.?\s*([IVXLCDM]+|\d+)\b",
+    re.IGNORECASE,
+)
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _config import load_config, catalog_path, context_paths  # noqa: E402
@@ -60,15 +68,42 @@ def check_broken_references(catalog: list[dict]) -> list[tuple[str, str]]:
     return broken
 
 
+def _get_creator(entry: dict) -> str | None:
+    """Return the primary creator (author/director/artist), lowercased."""
+    c = entry.get("author") or entry.get("director") or entry.get("artist")
+    return c.lower().strip() if c else None
+
+
 def check_duplicates(catalog: list[dict]) -> list[tuple[str, str, float]]:
-    """Find potential duplicate entries via fuzzy title matching."""
-    titles = [e["title"] for e in catalog]
+    """Find potential duplicate entries via fuzzy title matching.
+
+    Filters out two common false-positive patterns:
+      - Different creators: if both entries name an author/director/artist and
+        they disagree, the pair is not a duplicate even if titles are similar
+        (e.g., "The Satanic Rituals" by LaVey vs "The Satanic Scriptures" by
+        Gilmore).
+      - Series siblings: if creators match and both titles carry a volume or
+        part indicator (Vol 1/Vol 2, No. 1/No. 2, Part I/Part II, A-L/M-Z
+        encyclopedia splits), the pair is a series, not a duplicate.
+    """
     dupes = []
-    for i in range(len(titles)):
-        for j in range(i + 1, len(titles)):
-            ratio = SequenceMatcher(None, titles[i].lower(), titles[j].lower()).ratio()
-            if ratio >= DUPLICATE_THRESHOLD and titles[i] != titles[j]:
-                dupes.append((titles[i], titles[j], ratio))
+    for i in range(len(catalog)):
+        for j in range(i + 1, len(catalog)):
+            a, b = catalog[i], catalog[j]
+            ta, tb = a["title"], b["title"]
+            if ta == tb:
+                continue
+            ratio = SequenceMatcher(None, ta.lower(), tb.lower()).ratio()
+            if ratio < DUPLICATE_THRESHOLD:
+                continue
+            ca, cb = _get_creator(a), _get_creator(b)
+            # Different creators → not a dupe
+            if ca and cb and ca != cb:
+                continue
+            # Same creator + both titles carry volume/part markers → series
+            if ca and ca == cb and VOLUME_PATTERN.search(ta) and VOLUME_PATTERN.search(tb):
+                continue
+            dupes.append((ta, tb, ratio))
     dupes.sort(key=lambda x: x[2], reverse=True)
     return dupes
 
