@@ -28,6 +28,7 @@ shelves/unreadable.json
 
 # Scrolls (wiki) — personal content
 scrolls/log.md
+scrolls/log-archive.md
 scrolls/index.md
 scrolls/concepts/*.md
 scrolls/entities/*.md
