@@ -52,6 +52,7 @@ From the real run, a full-body source page includes:
 ---
 title: "<Title — Author (Year)>"
 type: source
+description: "<One-sentence summary (~120 chars) useful for filtering without reading the full page>"
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 sources:
@@ -102,6 +103,14 @@ Inscribe does NOT:
 ## After a run
 
 Update `scrolls/index.md` with new source entries.
+
+Append one row per dispatched item to `scrolls/provenance.md`:
+
+```
+| YYYY-MM-DD | <original filename> | desk | <type> | <disposition> | [[page-slug]] or path |
+```
+
+Types: `scroll-source`, `shelves-image`, `shelves-list`, `asset`. Dispositions: `created`, `promoted`, `moved`.
 
 Append an entry to `scrolls/log.md`:
 

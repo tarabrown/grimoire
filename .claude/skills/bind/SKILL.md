@@ -32,8 +32,8 @@ In the real run, the proposal was: "1 entity promotion (Hertzmann, 2 sources —
 ### 4. Execute the work
 Four categories, roughly in order of weight:
 
-- **Concept/entity page updates.** Add sources to frontmatter, write new body sections, add See Also links. In the real run: added `[[aaron-hertzmann]]` to See Also on 3 concept pages (autonomous-ai-artists, technology-disruption-in-art, generative-art).
-- **Entity promotions.** Multi-source threshold (2+ substantive sources citing the same figure). In the real run: created `scrolls/entities/aaron-hertzmann.md` — two sources (Gotlieb Lecture + Le Random interview).
+- **Concept/entity page updates.** Add sources to frontmatter, write new body sections, add See Also links. Add a `description:` field to frontmatter if missing (one sentence, ~120 chars, summarizing what the page is about — enables cheap filtering by consult). In the real run: added `[[aaron-hertzmann]]` to See Also on 3 concept pages (autonomous-ai-artists, technology-disruption-in-art, generative-art).
+- **Entity promotions.** Multi-source threshold (2+ substantive sources citing the same figure). Include `description:` in frontmatter when creating new entity pages. In the real run: created `scrolls/entities/aaron-hertzmann.md` — two sources (Gotlieb Lecture + Le Random interview).
 - **Concept hub candidates.** 4+ recent sources touching the same theme without a concept page. Create the page. Propose first for substantial new pages.
 - **Orphans and non-obvious connections.** Pages linked from nothing; cross-refs that inscribe missed.
 

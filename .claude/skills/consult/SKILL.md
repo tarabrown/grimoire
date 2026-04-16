@@ -12,6 +12,9 @@ description: Use when the user asks a substantive question the wiki should be th
 ### 1. Start from the index
 Read `scrolls/index.md`. Scan for pages relevant to the question — entity pages, concept pages, and source pages that match the topic. The index is organized by category (Art > Digital Art, Art > NFT Provenance, Entities, Concepts, Sources, Synthesis) — use the structure to narrow quickly.
 
+### 1.5. Frontmatter filter (token saver)
+For each candidate page from the index, read only the YAML frontmatter block (from the first `---` to the second `---`, typically the first ~10 lines). Check `description`, `title`, and `tags` against the query. Only read the full page content for pages that look relevant based on frontmatter. Pages missing the `description` field fall back to full-page reads (older pages will lack it — this is expected and will resolve over time as bind adds descriptions).
+
 ### 2. Read the hub page(s)
 Read the most relevant entity or concept page in full. These are the load-bearing pages — they aggregate multiple sources and carry cross-references to both Scrolls pages (via `[[wikilinks]]`) and Shelves catalog entries (via `../../shelves/wiki/books/<slug>.md` relative links).
 
