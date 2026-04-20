@@ -37,6 +37,23 @@ Personal settings live in `grimoire.json` (gitignored). Copy `grimoire.example.j
 
 See `docs/operations.md` for a cheat sheet of what each operation does and when to invoke it. See `docs/architecture.md` for the rationale behind the two-layer design.
 
+## Agent permissions
+
+This repo is read by both local Claude Code (full agent) and external agents (e.g., OpenClaw on a separate machine, via the GitHub skill). Permissions are enforced by convention here and by token scope on the external side.
+
+**Local Claude Code (this machine):**
+- `scrolls/`, `shelves/`: read + write
+- `desk/`: read + write; treat as ephemeral inbox, never commit contents
+- `raw/`: read only; never commit, never echo large blobs back to chat
+- `grimoire.json`: read only; never commit, never paste contents into chat or external tools
+- `.claude/skills/`: do not modify without an explicit request from the owner
+
+**External agents (OpenClaw and any other remote agent):**
+- Read-only access to `scrolls/**` and `shelves/**` only
+- No access to `desk/`, `raw/`, `.claude/`, `grimoire.json`, `tests/fixtures/`, or any dotfile
+- No write, no PR, no issue creation unless explicitly authorized per session
+- Identity must be a distinct GitHub user or app with a fine-grained PAT scoped to the two paths above
+
 ## Credits
 
 - **Shelves** is a fork of [mccoyspace/llmbrary](https://github.com/mccoyspace/llmbrary).

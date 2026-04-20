@@ -64,3 +64,12 @@ __pycache__/
 
 # Node (if ever used)
 node_modules/
+
+# Fork-local additions (tarabrown/grimoire)
+*.tmp
+*.swp
+.env
+.env.*
+!.env.example
+.claude/skills/**/local.*
+external_agents/state/
