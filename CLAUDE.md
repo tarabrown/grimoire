@@ -9,6 +9,17 @@ A book of instructions for summoning and directing entities. This repository is 
 
 **Flow:** material arrives in `desk/` → becomes either a shelves catalog entry or a scrolls source page → over time, scrolls pages mature into concept/entity hubs → concepts may reference shelves catalog entries; shelves entries may be cited from scrolls pages.
 
+## Apple Notes + PARA imports
+
+Apple Notes PARA imports are staged under `desk/apple-notes-import/` before translation:
+
+- `1-projects/`
+- `2-areas/`
+- `3-resources/`
+- `4-archives/`
+
+Preserve PARA as metadata, not as a replacement architecture. Imported notes must keep `source_app: apple_notes`, `source_folder`, `para`, `status: staged`, and `imported_at` frontmatter. See `docs/apple-notes-para-import.md`.
+
 ## The six operations
 
 Each operation is a Claude Code skill in `.claude/skills/`. Invoke by asking the LLM to perform the operation by name.
@@ -32,6 +43,7 @@ Personal settings live in `grimoire.json` (gitignored). Copy `grimoire.example.j
 - `scrolls/` pages use YAML frontmatter + markdown with `[[wikilinks]]`, no inline `#tags`. Kebab-case filenames.
 - Cross-layer links: scrolls → shelves use relative markdown links (e.g., `../shelves/wiki/books/<slug>.md`), not wikilinks.
 - `desk/` is the only inbox. `inscribe` dispatches from there; nothing else should be dropped directly into `shelves/photos/inbox/` or `raw/` by hand.
+- Apple Notes imports may use `desk/apple-notes-import/` as a protected staging area; process them in small batches and preserve `source_folder` + `para` when creating final pages.
 
 ## Operations documentation
 

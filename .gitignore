@@ -51,6 +51,10 @@ raw/archive/*
 # Desk (inbox) — never commit anything dropped here
 desk/*
 !desk/.gitkeep
+!desk/apple-notes-import/
+desk/apple-notes-import/**
+!desk/apple-notes-import/**/
+!desk/apple-notes-import/**/.gitkeep
 
 # Python
 __pycache__/
