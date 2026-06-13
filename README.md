@@ -25,6 +25,8 @@ The library tells you what you've read; the wiki tells you what you're working t
 
 Grimoire is conversational — every operation is you asking an LLM to run it. The files are plain markdown, so [Obsidian](https://obsidian.md) works well as the reading and editing layer — point a vault at your grimoire folder and you get scrolls and shelves with backlinks, graph view, and search. The [Obsidian Web Clipper](https://obsidian.md/clipper) browser extension sends articles straight into `desk/`, ready for the next inscribe pass.
 
+Apple Notes imports that use PARA should go through `desk/apple-notes-import/` first. Keep the original PARA folder in frontmatter, then process small batches with `inscribe`; see `docs/apple-notes-para-import.md`.
+
 A typical rhythm:
 
 **Daily-ish:** drop new material (articles, bookshelf photos, notes) into `desk/`. When it's time to process, ask your LLM:
@@ -94,6 +96,8 @@ cp tests/fixtures/audit_patterns.example.json tests/fixtures/audit_patterns.json
 
 ```
 desk/                # drop new material here
+desk/apple-notes-import/
+                     # staged Apple Notes PARA import scaffold
 shelves/             # library catalog + generated context
 scrolls/             # wiki pages you and the LLM co-maintain
 raw/                 # ingested source material

@@ -24,6 +24,23 @@ Look at each file in `desk/` (excluding `.gitkeep`) and classify:
 
 When uncertain between shelves-list and scroll-source, ask the user once.
 
+### Apple Notes PARA staging
+
+`desk/apple-notes-import/` is a preservation staging area, not a final destination. Treat notes inside its PARA buckets as normal desk items, but preserve origin metadata.
+
+Expected buckets:
+- `1-projects/` → `para: project`
+- `2-areas/` → `para: area`
+- `3-resources/` → `para: resource`
+- `4-archives/` → `para: archive`
+
+For each imported note:
+- Ensure frontmatter includes `source_app: apple_notes`, `source_folder`, `para`, `status: staged`, and `imported_at`.
+- If `source_folder` is missing, infer it from the staging path and use the original Apple Notes folder name when available.
+- When creating a final `scrolls/` page, carry forward `source_app`, `source_folder`, `para`, and `imported_at`; change `status` to `inscribed`.
+- Do not deduplicate, delete, or archive-clean during initial Apple Notes import.
+- Process a small batch first, ideally one note from each PARA bucket.
+
 ## Dispatch
 
 **For each shelves-image:**
@@ -38,6 +55,7 @@ When uncertain between shelves-list and scroll-source, ask the user once.
 - Create a source page at `scrolls/sources/<kebab-slug>.md` with YAML frontmatter + markdown body.
 - Move the original from `desk/` to `raw/processed/`.
 - Flag overlaps with existing concept/entity pages but do NOT edit them — that's `bind`'s job.
+- For Apple Notes PARA imports, preserve the required PARA frontmatter fields on the new source page.
 
 **For each already-processed asset:**
 - Move to `raw/assets/<descriptive-name>.<ext>` (use the related source page's slug).

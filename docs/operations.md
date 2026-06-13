@@ -12,6 +12,7 @@
 ## When in doubt
 
 - A new article or note → inscribe
+- Apple Notes PARA import → stage under `desk/apple-notes-import/`, preserve `source_folder` + `para`, then inscribe a small batch
 - A pattern you've noticed across material → flag it or ask bind to
 - A question → consult
 - An essay idea → divine (propose first)
